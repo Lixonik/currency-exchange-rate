@@ -1,26 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CurrencyService } from '../../services/currency.service';
+import { Subscription } from 'rxjs';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-currency-list',
   templateUrl: './currency-list.component.html',
   styleUrls: ['./currency-list.component.css']
 })
-export class CurrencyListComponent {
+export class CurrencyListComponent implements OnInit, OnDestroy {
   showMore = false
-  currencies = ['USD', 'EUR', 'GBP', 'CNY', 'JPY', 'TRY']
+  currencies = environment.currencies
   visibleCurrencies: string[] = []
   currentDateTime: Date
   errorMessage: string = ''
 
+  private subscription: Subscription = new Subscription()
+
   constructor(private currencyService: CurrencyService) {
-    this.updateVisibleCurrencies()
     this.currentDateTime = new Date()
     setInterval(() => {
       this.currentDateTime = new Date()
     }, 1000)
+  }
 
-    this.currencyService.getCurrencyData().subscribe(
+  ngOnInit() {
+    this.updateVisibleCurrencies()
+    this.subscription = this.currencyService.getCurrencyData().subscribe(
       (data) => {
         this.errorMessage = ''
       },
@@ -28,7 +34,11 @@ export class CurrencyListComponent {
         console.error('Error fetching currency data:', error)
         this.errorMessage = error?.error?.message
       }
-    )
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
   toggleShowMore() {
