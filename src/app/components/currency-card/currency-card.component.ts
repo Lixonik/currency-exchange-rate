@@ -26,7 +26,7 @@ export class CurrencyCardComponent implements OnInit, OnDestroy {
       .getCurrencyData()
       .subscribe((data) => {
         const key = `${this.source}${this.currency}`
-        const newRate = 1 / Number(data?.quotes[key])
+        const newRate = 1 / Number((data?.quotes as any)[key])
         this.difference = this.currentRate ? newRate - this.currentRate : 0
         this.currentRate = newRate
       })
