@@ -34,7 +34,7 @@ export class CurrencyListComponent implements OnInit, OnDestroy {
         console.error('Error fetching currency data:', error)
         this.errorMessage = error?.error?.message
       }
-    );
+    )
   }
 
   ngOnDestroy() {

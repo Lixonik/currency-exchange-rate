@@ -9,7 +9,7 @@ import { environment } from "../../../environments/environment";
   styleUrls: ['./currency-card.component.css']
 })
 export class CurrencyCardComponent implements OnInit, OnDestroy {
-  @Input() currency: string;
+  @Input() currency: string
 
   currentRate: number = 0
   difference: number = 0
@@ -29,7 +29,7 @@ export class CurrencyCardComponent implements OnInit, OnDestroy {
         const newRate = 1 / Number(data?.quotes[key])
         this.difference = this.currentRate ? newRate - this.currentRate : 0
         this.currentRate = newRate
-      });
+      })
   }
 
   ngOnDestroy() {
