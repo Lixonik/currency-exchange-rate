@@ -10,6 +10,7 @@ import { environment } from "../../../environments/environment";
 })
 export class CurrencyListComponent implements OnInit, OnDestroy {
   showMore = false
+  source = environment.source
   currencies = environment.currencies
   visibleCurrencies: string[] = []
   currentDateTime: Date
