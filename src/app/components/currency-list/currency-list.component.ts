@@ -28,7 +28,7 @@ export class CurrencyListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.updateVisibleCurrencies()
-    this.dataSubscription = this.currencyService.getCurrencyData().subscribe( data => {
+    this.dataSubscription = this.currencyService.getCurrencyData().subscribe(data => {
       const quotes = data?.quotes as any
       for (const currency of this.currencies) {
         const key = `${this.source}${currency}`
