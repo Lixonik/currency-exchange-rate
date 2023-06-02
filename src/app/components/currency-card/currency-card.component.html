@@ -1,7 +1,7 @@
 <div class="card">
   {{currency}}
   <span>
-    {{currentRate | roundAndStringify}}
+    {{rate | roundAndStringify}}
     <ng-container *ngIf="difference > 0">
       <mat-icon>arrow_drop_up</mat-icon>
     </ng-container>

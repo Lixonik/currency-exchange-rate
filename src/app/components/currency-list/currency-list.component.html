@@ -21,6 +21,7 @@
       <app-currency-card
         *ngFor="let currency of visibleCurrencies"
         [currency]="currency"
+        [rate]="rates[currency]"
       ></app-currency-card>
     </ng-container>
   </div>

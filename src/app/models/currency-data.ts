@@ -1,4 +1,4 @@
-export interface ICurrenciesData {
+export interface ICurrencyData {
   quotes: object
   source: string
   success: boolean

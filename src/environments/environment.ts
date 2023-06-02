@@ -4,12 +4,10 @@ export const environment = {
   source: 'RUB',
   currencies: ['USD', 'EUR', 'GBP', 'CNY', 'JPY', 'TRY'],
 
-  get API_KEY(): string {
-    return 'PmCLpxqNLflJzC2JKBCauFNaAD1Liud4' /* if the limit is exhausted, use one of these keys
+  API_KEY:  'ug3rjhXnBpJ2VrUs45eMGFVz0U8xBv9G', /* if the limit is exhausted, use one of these keys
    'BAJZ4EMREqfRR8ZS6Rh9y2eYLHdkm4h5', '6uKpZlswZ7hQ7HsFk0khiJaAkvUoCbGp', 'AKIu6YLorsRocwxRPgnotKb6q2faUqtq',
-   'ug3rjhXnBpJ2VrUs45eMGFVz0U8xBv9G', 'r9k40eBXKeZZw8uMlD6OXA8xGOgwn1S4', 'HTr64up3sABnlg5DPQTlw0Z2i5JrY3w6'
+   'ug3rjhXnBpJ2VrUs45eMGFVz0U8xBv9G', 'PmCLpxqNLflJzC2JKBCauFNaAD1Liud4', 'HTr64up3sABnlg5DPQTlw0Z2i5JrY3w6'
   */
-  },
 
   get API_URL(): string {
     const source = encodeURIComponent(this.source)

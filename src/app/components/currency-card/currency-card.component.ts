@@ -1,6 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { CurrencyService } from '../../services/currency.service';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { environment } from "../../../environments/environment";
 
 @Component({
@@ -8,31 +6,29 @@ import { environment } from "../../../environments/environment";
   templateUrl: './currency-card.component.html',
   styleUrls: ['./currency-card.component.css']
 })
-export class CurrencyCardComponent implements OnInit, OnDestroy {
+export class CurrencyCardComponent implements OnChanges, OnInit {
   @Input() currency: string
+  @Input() rate: number
 
-  currentRate: number = 0
+  previousRate: number = 0
   difference: number = 0
 
-  private readonly source: string = ''
-  private subscription: Subscription = new Subscription()
 
-  constructor(private currencyService: CurrencyService) {
+  private readonly source: string = ''
+
+  constructor() {
     this.source = environment.source
   }
 
   ngOnInit() {
-    this.subscription = this.currencyService
-      .getCurrencyData()
-      .subscribe((data) => {
-        const key = `${this.source}${this.currency}`
-        const newRate = 1 / Number((data?.quotes as any)[key])
-        this.difference = this.currentRate ? newRate - this.currentRate : 0
-        this.currentRate = newRate
-      })
+    this.previousRate = 0
+    this.difference = 0
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe()
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.rate) {
+      this.difference = this.previousRate !== 0 ? this.rate - this.previousRate : 0
+      this.previousRate = this.rate
+    }
   }
 }
