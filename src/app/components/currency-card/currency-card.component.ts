@@ -13,7 +13,6 @@ export class CurrencyCardComponent implements OnChanges, OnInit {
   previousRate: number = 0
   difference: number = 0
 
-
   private readonly source: string = ''
 
   constructor() {
